@@ -12,11 +12,12 @@ public class Object_instantiater : MonoBehaviour
     private GameObject prefabToInstantiate;
     public Vector3 minBounds;
     public Vector3 maxBounds;
-
-    void Start()
+    //private GameObject snake;
+    public void Start()
     {
         good_egg_count = 0;
         poison_egg_count = 0;
+        //snake = transform.GetChild(0).transform.gameObject;
         instantiateObject();
     }
 
@@ -28,17 +29,30 @@ public class Object_instantiater : MonoBehaviour
 
     public void instantiateObject()
     {
-        int randomIndex = Random.Range(0, 3);
-        if (randomIndex == 0)
+        if(good_egg_count <= 10 && poison_egg_count <= 5)
         {
-            prefabToInstantiate = poison_egg;
-            poison_egg_count++;
+            int randomIndex = Random.Range(0, 3);
+            if (randomIndex == 0)
+            {
+                prefabToInstantiate = poison_egg;
+                poison_egg_count++;
+            }
+            else
+            {
+                prefabToInstantiate = good_egg;
+                good_egg_count++;
+            }
         }
-        else
+        else if(poison_egg_count > 5)
         {
             prefabToInstantiate = good_egg;
             good_egg_count++;
         }
+        else if(good_egg_count>10)
+        {
+            //Game completed sucessfully.
+        }
+        
 
         Vector3 randomPosition = new Vector3(
                 Random.Range(minBounds.x, maxBounds.x),
@@ -47,7 +61,7 @@ public class Object_instantiater : MonoBehaviour
             );
 
         Instantiate(prefabToInstantiate, randomPosition, Quaternion.identity);
-        if(prefabToInstantiate.tag == "Good_egg")
+        if(prefabToInstantiate.tag == "Poison_egg")
         {
             StartCoroutine(destroyGreenEgg(5f));
         }
@@ -56,13 +70,9 @@ public class Object_instantiater : MonoBehaviour
 
     IEnumerator destroyGreenEgg(float x)
     {
-        int temp_green_cnt = good_egg_count;
-        int temp_red_cnt = poison_egg_count;
         yield return new WaitForSeconds(x);
-        if(good_egg_count == temp_green_cnt && poison_egg_count == temp_red_cnt)
-        {
-            Destroy(prefabToInstantiate);
-            instantiateObject();
-        }
+        Destroy(prefabToInstantiate);
+        instantiateObject();
+        
     }
 }

@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Good_egg
   - Poison_egg
+  - Border
+  - Snake
   layers:
   - Default
   - TransparentFX
