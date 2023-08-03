@@ -1651,6 +1651,7 @@ MonoBehaviour:
     type: 3}
   good_egg_count: 0
   poison_egg_count: 0
+  snake_controller: {fileID: 7281007292975187215}
   minBounds: {x: -4.5, y: 0.31, z: -4}
   maxBounds: {x: 4.5, y: 0.31, z: 4}
 --- !u!1 &1803807653
