@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Object_instantiater : MonoBehaviour
 {
-    // Start is called before the first frame update
+   
+    
     [SerializeField]
     private GameObject good_egg, poison_egg;
     [SerializeField]
@@ -71,8 +72,8 @@ public class Object_instantiater : MonoBehaviour
 
     public void instantiateObject()
     {
-        if(poison_egg_count >= 4 && good_egg_count >= 9)
-        {
+        if(poison_egg_count > 4 && good_egg_count > 9)
+        { 
             snake_controller.gameCompleted();
             return;
         }
